@@ -1,8 +1,9 @@
+import { NgClass } from '@angular/common';
 import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-products-list',
-  imports: [],
+  imports: [NgClass],
   templateUrl: './products-list.html',
   styleUrl: './products-list.css',
 })

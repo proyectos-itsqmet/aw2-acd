@@ -3,13 +3,35 @@
     <div
       class="flex flex-col justify-between bg-white rounded-2xl p-4 gap-4 shadow-md hover:shadow-lg overflow-hidden"
     >
+      <div
+        class="absolute flex rounded-full px-3 items-center justify-center py-1"
+        [ngClass]="{ 'bg-green-200': item.stock > 0, 'bg-red-200': item.stock <= 0 }"
+      >
+        <span
+          class="text-xs"
+          [ngClass]="{ 'text-green-500': item.stock > 0, 'text-red-400': item.stock <= 0 }"
+        >
+          @if (item.stock <= 0) {
+            Out of stock
+          } @else {
+            In stock
+          }
+        </span>
+      </div>
       <img [src]="item.imageUrl" alt="{{ item.name }}" class="h-48 w-full object-contain" />
       <div class="flex flex-col">
         <p class="text-gray-400 text-xs">{{ item.categoria }}</p>
         <p class="text-sm text-gray-800 font-medium">{{ item.name }}</p>
         <div class="w-full flex items-center justify-between mt-3">
           <p class="text-sm text-gray-800 font-medium">${{ item.price }}</p>
-          <button class="rounded-full bg-cyan-600 p-2 cursor-pointer hover:bg-cyan-700">
+          <button
+            class="rounded-full bg-cyan-600 p-2"
+            [ngClass]="{
+              'bg-gray-300': item.stock <= 0,
+              'cursor-not-allowed': item.stock <= 0,
+              'cursor-pointer hover:bg-cyan-700': item.stock > 0,
+            }"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
