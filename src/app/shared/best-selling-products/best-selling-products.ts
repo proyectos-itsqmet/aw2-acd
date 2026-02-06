@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { ProductsList } from '../products-list/products-list';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-best-selling-products',
-  imports: [ProductsList],
+  imports: [ProductsList, RouterLink],
   templateUrl: './best-selling-products.html',
   styleUrl: './best-selling-products.css',
 })
