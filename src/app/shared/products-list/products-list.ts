@@ -1,12 +1,14 @@
 import { NgClass } from '@angular/common';
-import { Component, input } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Product } from '../../models/product';
+import { ProductCard } from '../product-card/product-card';
 
 @Component({
   selector: 'app-products-list',
-  imports: [NgClass],
+  imports: [ProductCard],
   templateUrl: './products-list.html',
   styleUrl: './products-list.css',
 })
 export class ProductsList {
-  products = input<any[]>([]);
+  @Input() products?: Product[];
 }

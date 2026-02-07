@@ -1,1 +1,47 @@
-<p>product-card works!</p>
+<div
+  class="absolute flex rounded-full px-3 items-center justify-center py-1"
+  [ngClass]="{ 'bg-green-200': product.stock > 0, 'bg-red-200': product.stock <= 0 }"
+>
+  <span
+    class="text-xs"
+    [ngClass]="{ 'text-green-500': product.stock > 0, 'text-red-400': product.stock <= 0 }"
+  >
+    @if (product.stock <= 0) {
+      Out of stock
+    } @else {
+      In stock
+    }
+  </span>
+</div>
+<img [src]="product.imageUrl" alt="{{ product.name }}" class="h-48 w-full object-contain" />
+<div class="flex flex-col">
+  <p class="text-gray-400 text-xs">{{ product.category }}</p>
+  <p class="text-sm text-gray-800 font-medium">{{ product.name }}</p>
+  <div class="w-full flex items-center justify-between mt-3">
+    <p class="text-sm text-gray-800 font-medium">${{ product.price }}</p>
+    <button
+      (click)="onProductSelected(product)"
+      class="rounded-full bg-cyan-600 p-2"
+      [ngClass]="{
+        'bg-gray-300': product.stock <= 0,
+        'cursor-not-allowed': product.stock <= 0,
+        'cursor-pointer hover:bg-cyan-700': product.stock > 0,
+      }"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="size-4 text-white"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+      </svg>
+    </button>
+  </div>
+</div>
+
+@if (selectProduct) {
+  <app-toast [message]="selectProduct.name" (toastEvent)="showToast($event)"></app-toast>
+}
